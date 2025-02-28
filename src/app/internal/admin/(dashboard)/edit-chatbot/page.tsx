@@ -171,7 +171,7 @@ export default function EditChatbotPage() {
                 <TabsList className="grid grid-cols-2 w-full max-w-md mb-6">
                   <TabsTrigger value="messages" className="flex items-center gap-2">
                     <IconMessage className="w-4 h-4" />
-                    <span>Messages</span>
+                    <span>Prompts</span>
                   </TabsTrigger>
                   <TabsTrigger value="training" className="flex items-center gap-2">
                     <IconMessageQuestion className="w-4 h-4" />
@@ -185,7 +185,7 @@ export default function EditChatbotPage() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-blue-700">
                         <IconMessage className="w-5 h-5" />
-                        Welcome Message
+                        System Prompt
                       </CardTitle>
                       <CardDescription>
                         This message will be displayed when a user first interacts with your chatbot.
@@ -198,18 +198,6 @@ export default function EditChatbotPage() {
                         placeholder="Hi there! I'm your friendly assistant. How can I help you today?"
                         className="min-h-32 resize-y text-base"
                       />
-                      <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-full bg-blue-600 flex items-center justify-center flex-shrink-0">
-                            <IconRobot className="w-5 h-5 text-white" />
-                          </div>
-                          <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 flex-1">
-                            <p className="text-gray-800">
-                              {chatbotSettings.welcomeMessage || "Hi there! I'm your friendly assistant. How can I help you today?"}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
                     </CardContent>
                   </Card>
 
@@ -217,7 +205,7 @@ export default function EditChatbotPage() {
                     <CardHeader>
                       <CardTitle className="flex items-center gap-2 text-amber-700">
                         <IconMessageQuestion className="w-5 h-5" />
-                        Fallback Response
+                        Retriever Prompt
                       </CardTitle>
                       <CardDescription>
                         This message will be displayed when the chatbot cannot understand or process a user's query.
@@ -230,18 +218,7 @@ export default function EditChatbotPage() {
                         placeholder="I'm sorry, I didn't quite understand that. Could you rephrase your question?"
                         className="min-h-32 resize-y text-base"
                       />
-                      <div className="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-100">
-                        <div className="flex items-start gap-3">
-                          <div className="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center flex-shrink-0">
-                            <IconRobot className="w-5 h-5 text-white" />
-                          </div>
-                          <div className="bg-white p-3 rounded-lg shadow-sm border border-gray-200 flex-1">
-                            <p className="text-gray-800">
-                              {chatbotSettings.fallbackResponse || "I'm sorry, I didn't quite understand that. Could you rephrase your question?"}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
+                      
                     </CardContent>
                   </Card>
                 </TabsContent>
