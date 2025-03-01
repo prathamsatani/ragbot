@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { RefreshCw, Search } from "lucide-react";
-import logEvent from "@/middleware/logging/log";
+import logAPICall from "@/middleware/logging/log";
 
 interface Log {
   timestamp: string;
@@ -34,7 +34,7 @@ export default function Page() {
     try {
       setIsLoading(true);
       const response = await fetch("/api/logging/fetch-logs");
-      await logEvent({
+      await logAPICall({
         method: "GET",
         endpoint: "/api/auth/user-actions/fetch",
         status: response.status,

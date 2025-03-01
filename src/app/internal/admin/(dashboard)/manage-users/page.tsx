@@ -1,6 +1,6 @@
 "use client";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import logEvent from "@/middleware/logging/log";
+import logAPICall from "@/middleware/logging/log";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { IconPencil, IconPlus, IconTrash } from "@tabler/icons-react";
 import { RefreshCw, Search } from "lucide-react";
@@ -46,7 +46,7 @@ export default function Page() {
       try {
         setIsLoading(true);
         const response = await fetch("/api/auth/user-actions/fetch");
-        await logEvent({
+        await logAPICall({
           method: "GET",
           endpoint: "/api/auth/user-actions/fetch",
           status: response.status,

@@ -11,7 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@radix-ui/react-label";
 import { useState } from "react";
 import loginUser from "@/middleware/auth/loginUser";
-import logEvent from "@/middleware/logging/log";
+import logAPICall from "@/middleware/logging/log";
 
 export default function Page() {
   const [email, setEmail] = useState("");

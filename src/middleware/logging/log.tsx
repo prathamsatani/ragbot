@@ -1,5 +1,3 @@
-import { time } from "console";
-
 interface LogProps {
 	method: string;
 	endpoint: string;
@@ -8,7 +6,7 @@ interface LogProps {
 	ip: string;
 }
 
-export default async function logEvent({ method, endpoint, status, timestamp, ip }: LogProps) {
+export default async function logAPICall({ method, endpoint, status, timestamp, ip }: LogProps) {
   await fetch("/api/logging/log", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

@@ -478,3 +478,48 @@
 [32mINFO[0m:     [27-02-2025 23:01:49] Waiting for application startup.
 [32mINFO[0m:     [27-02-2025 23:01:49] Application startup complete.
 [32mINFO[0m:     [27-02-2025 23:01:49] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[33mWARNING[0m:  [28-02-2025 22:11:37] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [28-02-2025 22:11:38] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [28-02-2025 22:11:38] Starting component System
+[36mDEBUG[0m:    [28-02-2025 22:11:38] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [28-02-2025 22:11:38] Starting component SqliteDB
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component Posthog
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component LocalExecutor
+[36mDEBUG[0m:    [28-02-2025 22:11:39] Starting component SegmentAPI
+[32mINFO[0m:     [28-02-2025 22:11:39] Started server process [[36m26272[0m]
+[32mINFO[0m:     [28-02-2025 22:11:39] Waiting for application startup.
+[32mINFO[0m:     [28-02-2025 22:11:39] Application startup complete.
+[32mINFO[0m:     [28-02-2025 22:11:39] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[33mWARNING[0m:  [28-02-2025 23:04:47] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [28-02-2025 23:04:48] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component System
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component SqliteDB
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component Posthog
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component LocalExecutor
+[36mDEBUG[0m:    [28-02-2025 23:04:48] Starting component SegmentAPI
+[32mINFO[0m:     [28-02-2025 23:04:48] Started server process [[36m25356[0m]
+[32mINFO[0m:     [28-02-2025 23:04:48] Waiting for application startup.
+[32mINFO[0m:     [28-02-2025 23:04:48] Application startup complete.
+[32mINFO[0m:     [28-02-2025 23:04:48] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[33mWARNING[0m:  [01-03-2025 16:50:55] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [01-03-2025 16:50:55] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component System
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component SqliteDB
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component Posthog
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component LocalExecutor
+[36mDEBUG[0m:    [01-03-2025 16:50:55] Starting component SegmentAPI
+[32mINFO[0m:     [01-03-2025 16:50:56] Started server process [[36m16616[0m]
+[32mINFO[0m:     [01-03-2025 16:50:56] Waiting for application startup.
+[32mINFO[0m:     [01-03-2025 16:50:56] Application startup complete.
+[32mINFO[0m:     [01-03-2025 16:50:56] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)

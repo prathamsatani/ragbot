@@ -1,3 +1,25 @@
+import { UUID } from "mongodb"
+
+export class EventLogModel{
+    constructor(
+        public insertId: UUID,
+        public timestamp: Date,
+        public severity: string,
+        public testPayload: string,
+        public source: string,
+    ){}
+
+    getLog(){
+        return {
+            insertId: this.insertId,
+            timestamp: this.timestamp,
+            severity: this.severity,
+            testPayload: this.testPayload,
+            source: this.source
+        }
+    }
+}
+
 export class APILogModel{
     constructor(
         public method: string,
@@ -13,7 +35,7 @@ export class APILogModel{
             endpoint: this.endpoint,
             status: this.status,
             timestamp: this.timestamp,
-            ip: this.ip || null
+            ip: this.ip
         }
     }
 }
