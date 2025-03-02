@@ -1,6 +1,5 @@
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
-import type { Document } from "@langchain/core/documents";
 import { CSVLoader } from "@langchain/community/document_loaders/fs/csv";
 import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { TextLoader } from "langchain/document_loaders/fs/text";
@@ -26,17 +25,17 @@ class VectorStore {
   }
 
   async ingestFile(fileType: string, filePath: string): Promise<void> {
-    if (fileType === "csv") {
+    if (fileType === "text/csv") {
       const loader = new CSVLoader(filePath);
       const documents = await loader.load();
       const splittedDocuments = await this.splitter.splitDocuments(documents);
       this.chroma.addDocuments(splittedDocuments);
-    } else if (fileType === "txt") {
+    } else if (fileType === "text/plain") {
       const loader = new TextLoader(filePath);
       const documents = await loader.load();
       const splittedDocuments = await this.splitter.splitDocuments(documents);
       this.chroma.addDocuments(splittedDocuments);
-    } else if (fileType === "pdf") {
+    } else if (fileType === "application/pdf") {
       const loader = new PDFLoader(filePath);
       const documents = await loader.load();
       const splittedDocuments = await this.splitter.splitDocuments(documents);

@@ -353,7 +353,7 @@ export default function EditChatbotPage() {
                           <TableHead>Last Updated</TableHead>
                           <TableHead>Status</TableHead>
                           <TableHead>File Name</TableHead>
-                          <TableHead className="">Actions</TableHead>
+                          <TableHead className="text-right">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>

@@ -51,6 +51,13 @@ export async function POST(request: Request): Promise<Response> {
   const chatbotSettings = new ChatbotSettingsModel();
   chatbotSettings.serialize(jsonObject);
 
+  await insertIntoDB({
+    collection,
+    document: chatbotSettings.getChatbotSettings()
+  });
+
+  client.close();
+
   return new Response("OK", { status: 200 });
 }
 
@@ -85,7 +92,6 @@ export async function PUT(request: Request): Promise<Response> {
 
   const chatbotSettings = new ChatbotSettingsModel();
   chatbotSettings.serialize(jsonObject);
-
 
   await updateDB({
     collection,
