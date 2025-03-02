@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { v4 } from "uuid";
 
 interface ChatbotSettings {
   _id?: string,
@@ -15,10 +16,10 @@ interface ChatbotSettings {
   retrieverPrompt: string,
   systemPrompt: string,
   collectionName: string,
-  dateCreated: Date | string,
-  contextFilePath: string,
+  dateCreated: Date,
   isActive: boolean,
-  lastUpdated: Date | string,
+  lastUpdated: Date,
+  contextFile?: File;
 }
 
 export default function EditChatbotPage() {
@@ -28,9 +29,9 @@ export default function EditChatbotPage() {
     retrieverPrompt: "",
     collectionName: "",
     dateCreated: new Date(),
-    contextFilePath: "",
     isActive: false,
     lastUpdated: new Date(),
+    contextFile: undefined
   });
 
   const [isLoading, setIsLoading] = useState(true);
@@ -69,7 +70,7 @@ export default function EditChatbotPage() {
         const response = await fetch("/api/chatbot/fetch-settings");
         await logAPICall({
           method: "GET",
-          endpoint: "/api/chatbot/settings",
+          endpoint: "/api/chatbot/fetch-settings",
           status: response.status,
           timestamp: new Date(),
           ip: "",
@@ -80,6 +81,7 @@ export default function EditChatbotPage() {
         }
         
         const data = await response.json();
+
         setChatbotSettingsList(data);
         
         if (!Array.isArray(data) && data._id) {
@@ -90,7 +92,6 @@ export default function EditChatbotPage() {
             retrieverPrompt: data.retrieverPrompt,
             collectionName: data.collectionName,
             dateCreated: data.dateCreated,
-            contextFilePath: data.contextFilePath,
             isActive: data.isActive,
             lastUpdated: data.lastUpdated,
           });
@@ -122,7 +123,7 @@ export default function EditChatbotPage() {
     if (file) {
       setChatbotSettings(prev => ({
         ...prev,
-        trainingDataFile: file
+        contextFile: file
       }));
       setFileName(file.name);
       setSuccess(`File "${file.name}" selected successfully!`);
@@ -135,36 +136,7 @@ export default function EditChatbotPage() {
       setIsSaving(true);
       setSuccess(null);
       setError(null);
-      
-      const formData = new FormData();
-      formData.append('systemPrompt', chatbotSettings.systemPrompt);
-      formData.append('retrieverPrompt', chatbotSettings.retrieverPrompt);
-      formData.append('name', chatbotSettings.name || '');
-      formData.append('_id', chatbotSettings._id || '');
-      
-      // if (chatbotSettings.trainingDataFile) {
-      //   formData.append('trainingData', chatbotSettings.trainingDataFile);
-      // }
-      
-      const response = await fetch('/api/chatbot/settings', {
-        method: 'POST',
-        body: formData
-      });
-      
-      await logAPICall({
-        method: "POST",
-        endpoint: "/api/chatbot/settings",
-        status: response.status,
-        timestamp: new Date(),
-        ip: "",
-      });
-      
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-      
-      setSuccess("Chatbot settings saved successfully!");
-      
+
       // For demo purposes - update the settings list with the edited setting
       if (currentSettingId) {
         setChatbotSettingsList(prevList => 
@@ -178,12 +150,62 @@ export default function EditChatbotPage() {
         // For new settings, add to the list with a temporary _id
         const newSetting = {
           ...chatbotSettings,
-          _id: `temp-${Date.now()}`,
+          _id: v4(),
           dateCreated: new Date(),
           lastUpdated: new Date()
         };
         setChatbotSettingsList(prevList => [...prevList, newSetting]);
       }
+      
+      const formData = new FormData();
+      
+      // Add all properties except the file
+      Object.entries(chatbotSettings).forEach(([key, value]) => {
+        if (key !== 'contextFile' && value !== undefined) {
+          formData.append(key, typeof value === 'boolean' ? value.toString() : value);
+        }
+      });
+      
+      // Add the file if it exists
+      if (chatbotSettings.contextFile) {
+        formData.append('contextFile', chatbotSettings.contextFile);
+      }
+
+      let response = undefined;
+      if (currentSettingId) {
+        response = await fetch('/api/chatbot/update-settings', {
+          method: 'PUT',
+          body: formData
+        });
+
+        await logAPICall({
+          method: "PUT",
+          endpoint: "/api/chatbot/update-settings",
+          status: response.status,
+          timestamp: new Date(),
+          ip: "",
+        });
+      }
+      else{
+        response = await fetch('/api/chatbot/update-settings', {
+          method: 'POST',
+          body: formData
+        });
+
+        await logAPICall({
+          method: "POST",
+          endpoint: "/api/chatbot/update-settings",
+          status: response.status,
+          timestamp: new Date(),
+          ip: "",
+        });
+      }
+      
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+      
+      setSuccess("Chatbot settings saved successfully!");
       
       // Reset edit mode
       setEditMode(false);
@@ -235,7 +257,6 @@ export default function EditChatbotPage() {
             retrieverPrompt: "",
             collectionName: "",
             dateCreated: new Date(),
-            contextFilePath: "",
             isActive: false,
             lastUpdated: new Date(),
           });
@@ -307,7 +328,6 @@ export default function EditChatbotPage() {
                         retrieverPrompt: "",
                         collectionName: "",
                         dateCreated: new Date(),
-                        contextFilePath: "",
                         isActive: false,
                         lastUpdated: new Date(),
                         name: "New Chatbot"
@@ -431,7 +451,7 @@ export default function EditChatbotPage() {
                           </label>
                           <Input
                             id="name"
-                            value={chatbotSettings.name || ""}
+                            value={chatbotSettings.name}
                             onChange={(e) => handleInputChange('name', e.target.value)}
                             placeholder="Enter chatbot name"
                           />

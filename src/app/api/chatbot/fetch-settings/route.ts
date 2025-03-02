@@ -4,10 +4,9 @@ export async function GET(req: Request) {
   try {
     const { client, collection } = await connectToDB({ dbName: "ragbot", collectionName: "bot-settings" });
 
-    const results = await findFromDB({ collection, filter: {isActive:true}, options: {} });
+    const results = await findFromDB({ collection, filter: {}, options: {} });
     client.close();
-    console.log(results);
-    console.log(typeof results);
+
     return new Response(JSON.stringify(results), {
       headers: { "Content-Type": "application/json" },
     });

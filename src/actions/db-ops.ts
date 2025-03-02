@@ -1,5 +1,5 @@
 import { MongoClient } from "mongodb";
-import type { Abortable, Collection, Document, Filter, FindOptions } from "mongodb";
+import type { Abortable, Collection, DeleteOptions, Document, Filter, FindOptions, InsertOneOptions, UpdateOptions } from "mongodb";
 
 interface connectToDBProps {
   dbName: string;
@@ -10,6 +10,25 @@ interface findFromDBProps {
   collection: Collection<Document>;
   filter: Filter<Document>;
   options: FindOptions & Abortable;
+}
+
+interface insertIntoDBProps {
+  collection: Collection<Document>;
+  document: Document;
+  options?: InsertOneOptions;
+}
+
+interface deleteFromDBProps {
+  collection: Collection<Document>;
+  filter: Filter<Document>;
+  options?: DeleteOptions;
+}
+
+interface updateDBProps {
+  collection: Collection<Document>;
+  document: Document;
+  filter: Filter<Document>;
+  options?: UpdateOptions;
 }
 
 export async function connectToDB({
@@ -35,19 +54,23 @@ export async function findFromDB({ collection, filter, options }: findFromDBProp
 export async function insertIntoDB({
   collection,
   document,
-}: {
-  collection: Collection<Document>;
-  document: Document;
-}) {
-  await collection.insertOne(document);
+  options
+}: insertIntoDBProps) {
+  await collection.insertOne(document, options);
 }
 
 export async function deleteFromDB({
   collection,
   filter,
-}: {
-  collection: Collection<Document>;
-  filter: Filter<Document>;
-}) {
+}: deleteFromDBProps) {
   await collection.deleteOne(filter);
+}
+
+export async function updateDB({
+  collection,
+  document,
+  filter,
+  options
+}: updateDBProps) {
+  await collection.updateOne(filter, document, options);
 }

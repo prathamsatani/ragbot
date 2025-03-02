@@ -7,7 +7,7 @@ interface LogProps {
 }
 
 export default async function logAPICall({ method, endpoint, status, timestamp, ip }: LogProps) {
-  await fetch("/api/logging/log", {
+  await fetch("/api/logging/api-log", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
