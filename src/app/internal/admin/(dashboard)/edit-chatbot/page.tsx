@@ -67,10 +67,10 @@ export default function EditChatbotPage() {
     const fetchChatbotSettings = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("/api/chatbot/fetch-settings");
+        const response = await fetch("/api/chatbot/settings");
         await logAPICall({
           method: "GET",
-          endpoint: "/api/chatbot/fetch-settings",
+          endpoint: "/api/chatbot/settings",
           status: response.status,
           timestamp: new Date(),
           ip: "",
@@ -173,28 +173,28 @@ export default function EditChatbotPage() {
 
       let response = undefined;
       if (currentSettingId) {
-        response = await fetch('/api/chatbot/update-settings', {
+        response = await fetch('/api/chatbot/settings', {
           method: 'PUT',
           body: formData
         });
 
         await logAPICall({
           method: "PUT",
-          endpoint: "/api/chatbot/update-settings",
+          endpoint: "/api/chatbot/settings",
           status: response.status,
           timestamp: new Date(),
           ip: "",
         });
       }
       else{
-        response = await fetch('/api/chatbot/update-settings', {
+        response = await fetch('/api/chatbot/settings', {
           method: 'POST',
           body: formData
         });
 
         await logAPICall({
           method: "POST",
-          endpoint: "/api/chatbot/update-settings",
+          endpoint: "/api/chatbot/settings",
           status: response.status,
           timestamp: new Date(),
           ip: "",
@@ -352,7 +352,8 @@ export default function EditChatbotPage() {
                           <TableHead>Date Created</TableHead>
                           <TableHead>Last Updated</TableHead>
                           <TableHead>Status</TableHead>
-                          <TableHead className="text-right">Actions</TableHead>
+                          <TableHead>File Name</TableHead>
+                          <TableHead className="">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
@@ -372,6 +373,7 @@ export default function EditChatbotPage() {
                                   {setting.isActive ? "Active" : "Inactive"}
                                 </div>
                               </TableCell>
+                              <TableCell>{setting.contextFile?.name || 'N/A'}</TableCell>
                               <TableCell className="text-right">
                                 <div className="flex justify-end gap-2">
                                   <Button 
@@ -473,7 +475,7 @@ export default function EditChatbotPage() {
                           type="checkbox"
                           id="isActive"
                           checked={chatbotSettings.isActive}
-                          onChange={(e) => handleInputChange('isActive', e.target.checked)}
+                          onChange={(e) => handleInputChange('isActive', Boolean(e.target.checked))}
                           className="h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
                         />
                         <label htmlFor="isActive" className="text-sm font-medium text-gray-700">
