@@ -538,3 +538,83 @@
 [32mINFO[0m:     [02-03-2025 15:11:44] Waiting for application startup.
 [32mINFO[0m:     [02-03-2025 15:11:44] Application startup complete.
 [32mINFO[0m:     [02-03-2025 15:11:44] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[33mWARNING[0m:  [08-03-2025 10:29:38] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [08-03-2025 10:29:40] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component System
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component SqliteDB
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component Posthog
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component LocalExecutor
+[36mDEBUG[0m:    [08-03-2025 10:29:40] Starting component SegmentAPI
+[32mINFO[0m:     [08-03-2025 10:29:40] Started server process [[36m33932[0m]
+[32mINFO[0m:     [08-03-2025 10:29:40] Waiting for application startup.
+[32mINFO[0m:     [08-03-2025 10:29:40] Application startup complete.
+[32mINFO[0m:     [08-03-2025 10:29:40] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[33mWARNING[0m:  [08-03-2025 22:26:09] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [08-03-2025 22:26:10] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component System
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component SqliteDB
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component Posthog
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component LocalExecutor
+[36mDEBUG[0m:    [08-03-2025 22:26:10] Starting component SegmentAPI
+[32mINFO[0m:     [08-03-2025 22:26:10] Started server process [[36m40140[0m]
+[32mINFO[0m:     [08-03-2025 22:26:10] Waiting for application startup.
+[32mINFO[0m:     [08-03-2025 22:26:10] Application startup complete.
+[32mINFO[0m:     [08-03-2025 22:26:10] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [08-03-2025 22:26:11] Backing off send_request(...) for 0.4s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B4FE323350>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
+[32mINFO[0m:     [08-03-2025 22:26:11] Backing off send_request(...) for 1.1s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B4FE39E060>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
+[32mINFO[0m:     [08-03-2025 22:26:12] Backing off send_request(...) for 1.0s (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B4FE39E420>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
+[31mERROR[0m:    [08-03-2025 22:26:13] Giving up send_request(...) after 4 tries (requests.exceptions.ConnectionError: HTTPSConnectionPool(host='us.i.posthog.com', port=443): Max retries exceeded with url: /batch/ (Caused by NameResolutionError("<urllib3.connection.HTTPSConnection object at 0x000001B4FE39E780>: Failed to resolve 'us.i.posthog.com' ([Errno 11001] getaddrinfo failed)")))
+[32mINFO[0m:     [08-03-2025 22:27:53] ::1:60492 - "GET /api/v2/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:27:53] ::1:60493 - "GET /api/v2/tenants/default_tenant/databases/default_database HTTP/1.1" 200
+[36mDEBUG[0m:    [08-03-2025 22:27:53] Collection my_collection already exists, returning existing collection.
+[32mINFO[0m:     [08-03-2025 22:27:53] ::1:60492 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 200
+[36mDEBUG[0m:    [08-03-2025 22:27:53] Starting component PersistentLocalHnswSegment
+[32mINFO[0m:     [08-03-2025 22:27:53] ::1:60493 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:28:29] ::1:60525 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:30:33] ::1:60558 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:32:52] ::1:60710 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:34:05] ::1:60731 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 22:34:52] ::1:60741 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[33mWARNING[0m:  [08-03-2025 23:04:28] chroma_server_nofile is not supported on Windows. chroma_server_nofile will not be set.
+[32mINFO[0m:     [08-03-2025 23:04:28] Anonymized telemetry enabled. See                     https://docs.trychroma.com/telemetry for more information.
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component System
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component OpenTelemetryClient
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component SqliteDB
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component SimpleQuotaEnforcer
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component Posthog
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component SimpleRateLimitEnforcer
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component LocalSegmentManager
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component LocalExecutor
+[36mDEBUG[0m:    [08-03-2025 23:04:28] Starting component SegmentAPI
+[32mINFO[0m:     [08-03-2025 23:04:28] Started server process [[36m36412[0m]
+[32mINFO[0m:     [08-03-2025 23:04:28] Waiting for application startup.
+[32mINFO[0m:     [08-03-2025 23:04:28] Application startup complete.
+[32mINFO[0m:     [08-03-2025 23:04:28] Uvicorn running on [1mhttp://localhost:8000[0m (Press CTRL+C to quit)
+[32mINFO[0m:     [08-03-2025 23:05:39] ::1:62147 - "GET /api/v2/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:05:39] ::1:62148 - "GET /api/v2/tenants/default_tenant/databases/default_database HTTP/1.1" 200
+[36mDEBUG[0m:    [08-03-2025 23:05:39] Collection my_collection already exists, returning existing collection.
+[32mINFO[0m:     [08-03-2025 23:05:39] ::1:62147 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 200
+[36mDEBUG[0m:    [08-03-2025 23:05:39] Starting component PersistentLocalHnswSegment
+[32mINFO[0m:     [08-03-2025 23:05:39] ::1:62148 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:05:51] ::1:62162 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:15:28] ::1:62358 - "GET /api/v2/tenants/default_tenant HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:15:28] ::1:62359 - "GET /api/v2/tenants/default_tenant/databases/default_database HTTP/1.1" 200
+[36mDEBUG[0m:    [08-03-2025 23:15:28] Collection my_collection already exists, returning existing collection.
+[32mINFO[0m:     [08-03-2025 23:15:28] ::1:62358 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:15:29] ::1:62359 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:15:39] ::1:62368 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:17:52] ::1:62397 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:18:49] ::1:62410 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:30:33] ::1:62694 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:30:59] ::1:62707 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:31:35] ::1:62720 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:32:07] ::1:62742 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200
+[32mINFO[0m:     [08-03-2025 23:32:29] ::1:62753 - "POST /api/v2/tenants/default_tenant/databases/default_database/collections/bc28ffb3-43f2-43d5-b321-4043c3931509/query HTTP/1.1" 200

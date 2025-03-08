@@ -1,19 +1,58 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
-import { Avatar} from "@/components/ui/avatar";
+import { Avatar } from "@/components/ui/avatar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import MyTextarea from "@/components/my-textarea";
 import { cn } from "@/lib/utils";
 import { Sidebar, SidebarBody } from "@/components/ui/sidebar";
-import { IconLayoutSidebar, IconEdit, IconRobotFace } from "@tabler/icons-react";
+import {
+  IconLayoutSidebar,
+  IconEdit,
+  IconRobotFace,
+} from "@tabler/icons-react";
 import Link from "next/link";
 import logEvent from "@/middleware/logging/log";
+import { remark } from "remark";
+import remarkHtml from "remark-html";
+import remarkGfm from "remark-gfm";
+
 
 type Message = {
   id: string;
   role: "user" | "assistant";
   content: string;
 };
+
+function MarkdownRenderer({ content }: { content: string }) {
+  const [htmlContent, setHtmlContent] = useState("");
+
+  useEffect(() => {
+    async function processMarkdown() {
+      // Add remarkGfm to the plugin chain
+      const processed = await remark()
+        .use(remarkGfm)
+        .use(remarkHtml)
+        .process(content);
+      setHtmlContent(processed.toString());
+    }
+    processMarkdown();
+  }, [content]);
+
+  // Add a wrapper with classes for debugging
+  return (
+    <div
+      className="prose prose-invert max-w-none [&>ol]:list-decimal [&>ul]:list-disc [&>ol]:ml-4 [&>ul]:ml-4 [&_li]:my-1 [&_ul]:my-2 [&_ol]:my-2 [&_li>ul]:mt-2 [&_li>ol]:mt-2 markdown-content"
+      style={
+        {
+          "--tw-prose-invert-bullets": "white",
+          "--tw-prose-invert-counters": "white",
+          width: "100%", // Ensure full width
+        } as React.CSSProperties
+      }
+      dangerouslySetInnerHTML={{ __html: htmlContent }}
+    />
+  );
+}
 
 export default function Page() {
   const [messages, setMessages] = useState<Message[]>([]);
@@ -28,7 +67,12 @@ export default function Page() {
     }
   }, [messages]);
 
-  const logAPICalls = async (method: string, endpoint: string, status: number, ip: string) => {
+  const logAPICalls = async (
+    method: string,
+    endpoint: string,
+    status: number,
+    ip: string
+  ) => {
     await fetch("/api/logging/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -40,7 +84,7 @@ export default function Page() {
         ip: ip,
       }),
     });
-  }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -65,7 +109,13 @@ export default function Page() {
       if (!response.ok) {
         throw new Error("Failed to get response");
       }
-      await logEvent({method: "POST", endpoint: "/api/chat", status: 200, timestamp: new Date(), ip: "",});
+      await logEvent({
+        method: "POST",
+        endpoint: "/api/chat",
+        status: 200,
+        timestamp: new Date(),
+        ip: "",
+      });
 
       const { text } = await response.json();
 
@@ -84,56 +134,71 @@ export default function Page() {
 
   const renderMessageContent = (message: Message) => {
     if (message.role === "user") {
-      return message.content;
+      // For user messages, simply render plain text
+      return <div className="whitespace-pre-wrap">{message.content}</div>;
     }
-    return (
-      <div
-        dangerouslySetInnerHTML={{ __html: message.content }}
-        className="prose prose-invert max-w-none [&>ol]:list-decimal [&>ul]:list-disc [&>ol]:ml-4 [&>ul]:ml-4 [&_li]:my-1 [&_ul]:my-2 [&_ol]:my-2 [&_li>ul]:mt-2 [&_li>ol]:mt-2"
-        style={{"--tw-prose-invert-bullets": "white", "--tw-prose-invert-counters": "white",} as React.CSSProperties}
-      />
-    );
-  };
 
+    // For assistant messages, check if the content appears to be markdown
+    const containsMarkdown =
+      /(\*\*|__|##|```|\[.*\]\(.*\)|!\[.*\]\(.*\)|-\s|[0-9]+\.\s|\|[\s\S]*\|)/.test(
+        message.content
+      );
+
+    // If it contains markdown patterns or is a large text block, use MarkdownRenderer
+    if (containsMarkdown || message.content.length > 100) {
+      return <MarkdownRenderer content={message.content} />;
+    } else {
+      // For simple text responses, render as plain text
+      return <div className="whitespace-pre-wrap">{message.content}</div>;
+    }
+  };
   const today = [
-    {title: "Today 1"},
-    {title: "Today 2"},
-    {title: "Today 3"},
-    {title: "Today 4"},
-    {title: "Today 5"},
-  ]
+    { title: "Today 1" },
+    { title: "Today 2" },
+    { title: "Today 3" },
+    { title: "Today 4" },
+    { title: "Today 5" },
+  ];
 
   const yesterday = [
-    {title: "Yesterday 1"},
-    {title: "Yesterday 2"},
-    {title: "Yesterday 3"},
-    {title: "Yesterday 4"},
-    {title: "Yesterday 5"},
-  ]
+    { title: "Yesterday 1" },
+    { title: "Yesterday 2" },
+    { title: "Yesterday 3" },
+    { title: "Yesterday 4" },
+    { title: "Yesterday 5" },
+  ];
 
   const lastWeek = [
-    {title: "Last Week 1"},
-    {title: "Last Week 2"},
-    {title: "Last Week 3"},
-    {title: "Last Week 4"},
-    {title: "Last Week 5"},
-  ]
+    { title: "Last Week 1" },
+    { title: "Last Week 2" },
+    { title: "Last Week 3" },
+    { title: "Last Week 4" },
+    { title: "Last Week 5" },
+  ];
 
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row  w-full flex-1 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
+        "rounded-md flex flex-col md:flex-row w-full flex-1 mx-auto border border-neutral-200 dark:border-neutral-700 overflow-hidden",
         "h-screen"
       )}
     >
       <Sidebar open={open} setOpen={setOpen} animate={true}>
         <SidebarBody className="gap-4 bg-background-sidebar">
           <div className="flex">
-            <button hidden={!open} onClick={() => {setOpen(!open)}} className="hover:bg-background-hover p-2 rounded-lg">
+            <button
+              hidden={!open}
+              onClick={() => setOpen(!open)}
+              className="hover:bg-background-hover p-2 rounded-lg"
+            >
               <IconLayoutSidebar className="text-font-main w-7 h-7" />
             </button>
-            <div className="w-full"/>
-            <Link hidden={!open} href="/" className="hover:bg-background-hover p-2 rounded-lg">
+            <div className="w-full" />
+            <Link
+              hidden={!open}
+              href="/"
+              className="hover:bg-background-hover p-2 rounded-lg"
+            >
               <IconEdit className="text-font-main w-7 h-7" />
             </Link>
           </div>
@@ -142,7 +207,13 @@ export default function Page() {
               <div className="text-font-main text-sm p-2">Today</div>
               <div className="flex flex-col">
                 {today.map((item) => (
-                  <Link href="" key={item.title} className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg">{item.title}</Link>
+                  <Link
+                    href=""
+                    key={item.title}
+                    className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg"
+                  >
+                    {item.title}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -150,7 +221,13 @@ export default function Page() {
               <div className="text-font-main text-sm p-2">Yesterday</div>
               <div className="flex flex-col">
                 {yesterday.map((item) => (
-                  <Link href="" key={item.title} className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg">{item.title}</Link>
+                  <Link
+                    href=""
+                    key={item.title}
+                    className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg"
+                  >
+                    {item.title}
+                  </Link>
                 ))}
               </div>
             </div>
@@ -158,22 +235,35 @@ export default function Page() {
               <div className="text-font-main text-sm p-2">Last Week</div>
               <div className="flex flex-col">
                 {lastWeek.map((item) => (
-                  <Link href="" key={item.title} className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg">{item.title}</Link>
+                  <Link
+                    href=""
+                    key={item.title}
+                    className="text-font-main p-2 text-sm hover:bg-background-hover rounded-lg"
+                  >
+                    {item.title}
+                  </Link>
                 ))}
               </div>
             </div>
-            
           </ScrollArea>
         </SidebarBody>
         <div className="flex flex-col items-stretch min-h-screen w-screen p-4 bg-background-main">
           <div className="flex">
-            <button hidden={open} onClick={() => {setOpen(!open);}} className="hover:bg-background-hover p-2 rounded-lg">
+            <button
+              hidden={open}
+              onClick={() => setOpen(!open)}
+              className="hover:bg-background-hover p-2 rounded-lg"
+            >
               <IconLayoutSidebar className="text-font-main w-7 h-7" />
             </button>
-            <Link hidden={open} href="/" className="hover:bg-background-hover p-2 rounded-lg">
+            <Link
+              hidden={open}
+              href="/"
+              className="hover:bg-background-hover p-2 rounded-lg"
+            >
               <IconEdit className="text-font-main w-7 h-7" />
             </Link>
-            <div className="w-4"/>
+            <div className="w-4" />
             <h1 className="text-xl text-font-main md:text-2xl font-semibold py-2">
               RAGBot
             </h1>
@@ -202,7 +292,7 @@ export default function Page() {
                           <Avatar>
                             <IconRobotFace className="w-8 h-8 text-font-main" />
                           </Avatar>
-                          <div className="bg-background-main text-font-main px-3 w-full [&_.prose]:w-full">
+                          <div className="bg-background-main text-font-main px-3 w-full overflow-x-auto">
                             {renderMessageContent(m)}
                           </div>
                         </div>
